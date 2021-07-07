@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=E:\final_proj\final_project\boxed.ncd
+OUTFILE=E:\final_proj\final_project\boxed.bit
+FAMILY=Spartan6
+PART=xc6slx16-3csg324
+WORKINGDIR=E:\final_proj\final_project
+LICENSE=ISE
+USER_INFO=203015155_203016297_210565169_566
