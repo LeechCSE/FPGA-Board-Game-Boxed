@@ -196,7 +196,8 @@ begin
 		      0: //First Player Turn
 			begin
 			   player_num_place <= 1;
-			   player_1_box_left = player_1_box[0] + player_1_box[1] + player_1_box[2] + player_1_box[3] + player_1_box[4] + player_1_box[5] + player_1_box[6] + player_1_box[7] + player_1_box[8]  + player_1_box[9] + player_1_box[10];
+			   player_1_box_left = player_1_box[0] + player_1_box[1] + player_1_box[2] + player_1_box[3] + player_1_box[4] + player_1_box[5] +
+					       | player_1_box[6] + player_1_box[7] + player_1_box[8]  + player_1_box[9] + player_1_box[10];
 			   
 			   if(score_mode && !rollPressed)
 			     begin
@@ -513,7 +514,8 @@ begin
 			begin
 			   
 			   player_num_place <= 2;
-			   player_2_box_left = player_2_box[0] + player_2_box[1] + player_2_box[2] + player_2_box[3] + player_2_box[4] + player_2_box[5] + player_2_box[6] + player_2_box[7] + player_2_box[8]  + player_2_box[9] + player_2_box[10];
+			   player_2_box_left = player_2_box[0] + player_2_box[1] + player_2_box[2] + player_2_box[3] + player_2_box[4] + player_2_box[5] + 
+					       | player_2_box[6] + player_2_box[7] + player_2_box[8]  + player_2_box[9] + player_2_box[10];
 			   //Check if the Roll Button is Pressed and initial state
 			   if(score_mode && !rollPressed)
 			     begin
@@ -832,7 +834,8 @@ begin
 		      0: //First Player Turn
 			begin
 			   player_num_place <= 1;
-			   player_1_box_left = player_1_box[0] + player_1_box[1] + player_1_box[2] + player_1_box[3] + player_1_box[4] + player_1_box[5] + player_1_box[6] + player_1_box[7] + player_1_box[8]  + player_1_box[9] + player_1_box[10];
+			   player_1_box_left = player_1_box[0] + player_1_box[1] + player_1_box[2] + player_1_box[3] + player_1_box[4] + player_1_box[5] + 
+					       | player_1_box[6] + player_1_box[7] + player_1_box[8]  + player_1_box[9] + player_1_box[10];
 			   
 			   if(score_mode && !rollPressed)
 			     begin
@@ -1136,7 +1139,7 @@ begin
 						   begin
 						      p_disp <= 3;//Set to blank
 						      player_num_place <= 5; //Set to blank
-                              tens_place <= 8; //Set to blank
+						      tens_place <= 8; //Set to blank
 						      ones_place <= 10; //Set to blank
 						   end
 					      end
@@ -1148,8 +1151,9 @@ begin
 		      1: //Second Player Turn
 			begin
 			   player_num_place <= 2;
-			   player_2_box_left = player_2_box[0] + player_2_box[1] + player_2_box[2] + player_2_box[3] + player_2_box[4] + player_2_box[5] + player_2_box[6] + player_2_box[7] + player_2_box[8]  + player_2_box[9] + player_2_box[10];
-								//Check if the Roll Button is Pressed and initial state
+			   player_2_box_left = player_2_box[0] + player_2_box[1] + player_2_box[2] + player_2_box[3] + player_2_box[4] + player_2_box[5] + 
+					       | player_2_box[6] + player_2_box[7] + player_2_box[8]  + player_2_box[9] + player_2_box[10];
+			   //Check if the Roll Button is Pressed and initial state
 			   if(score_mode && !rollPressed)
 			     begin
 				p_disp <= 1;
@@ -1466,7 +1470,8 @@ begin
 		      2: //First Player Turn
 			begin
 			   player_num_place <= 3;
-			   player_3_box_left = player_3_box[0] + player_3_box[1] + player_3_box[2] + player_3_box[3] + player_3_box[4] + player_3_box[5] + player_3_box[6] + player_3_box[7] + player_3_box[8]  + player_3_box[9] + player_3_box[10];
+			   player_3_box_left = player_3_box[0] + player_3_box[1] + player_3_box[2] + player_3_box[3] + player_3_box[4] + player_3_box[5] + 
+					       | player_3_box[6] + player_3_box[7] + player_3_box[8]  + player_3_box[9] + player_3_box[10];
 			   
 			   if(score_mode && !rollPressed)
 			     begin
