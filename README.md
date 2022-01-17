@@ -48,6 +48,12 @@ the clock speed, the latch could be re-sized for better reliability.
 | 0      | 00        | 0      |
 
 ### Core
+This Core module contains the logic of the game. The whole logic can be represented
+in the following FSM:
+
+![Delay FSM](/img/delay_fsm.png)
+
+
 
 ### Display Segment Module
 This module determines the front-end of the game. Based on the processed data from
@@ -76,4 +82,6 @@ seven-segment display.
 #### Mechanism: FSM
 ![Display FSM](/img/display_fsm.png)
 
-`S0` state draws letter 
+With the `Fast Clock` of ~512 Hz, the above FSM is running. Each state outputs 
+which segment is to draw in reverse one-hot encoding. More specifically, State 0 
+outputs `0111`, which indicates the first segment is to draw, and so on. 
