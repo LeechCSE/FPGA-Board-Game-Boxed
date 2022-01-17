@@ -53,5 +53,27 @@ the clock speed, the latch could be re-sized for better reliability.
 This module determines the front-end of the game. Based on the processed data from
 **Core** module, it outputs either alphabet letter or digit on four slots of 
 seven-segment display.
+
+![Seven Segments](/img/seven_seg.png)
+
+* First segment indicates the game mode
+    * `P` represents the Play mode, showing player is on turn (e.g. `P100`: Player 1 is ready to roll)
+    * `S` represents the Score mode, followed by player number and the number of remaining
+        sticks (e.g. `S109`: Player 1 has 9 sticks to remove) 
+    * `E` represents the end of game, followed by a letter `G` and `Player#` (e.g. `EGP2`)
+* Second segment mainly indicates the number of players in various modes
+    * `1`~`4`: player number
+    * `G`: End game mode
+* Third segment
+    * In Play mode, the value of first die(`1`~`6`)
+    * In Score mode, ten's place of remaning sticks(`0`~`1`)
+    * In End game mode, `P` as "Player"
+* Fourth segment
+    * In Play mode, the value of second die(`1`~`6`)
+    * In Score mode, one's place of remaning sticks(`0`~`9`)
+    * In End game mode, winning player number(`1`~`4`)
+    
 #### Mechanism: FSM
 ![Display FSM](/img/display_fsm.png)
+
+`S0` state draws letter 
