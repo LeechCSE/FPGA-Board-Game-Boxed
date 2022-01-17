@@ -15,9 +15,10 @@ The game, Boxed, is simulated on FPGA board with Verilog.
 This module divides the master clock(100 MHz) into the following clocks required
 in various sub-modules:
 * Fast Clock(~512 Hz) is used as a driver clock in **Display Segment** module
-* Change Clock(1 Hz) is used in Delay finite state machine(FSM) of **Core** module
-* Flash Clock(5 Hz) is used for flashing effect of display when the game is over
-    in **Core** module
+* Change Clock(1 Hz) is a pulse clock used in Delay finite state machine(FSM) 
+	of **Core** module
+* Flash Clock(5 Hz) is used for flashing effect of display when the game is over 
+	in **Core** module
 * New Clock(5 Hz) is used as a driver clock of Animate FSM in **Core** module
 
 
@@ -48,12 +49,26 @@ the clock speed, the latch could be re-sized for better reliability.
 | 0      | 00        | 0      |
 
 ### Core
-This Core module contains the logic of the game. The whole logic can be represented
-in the following FSM:
+This Core module contains the logic of the game. On start, some initialization
+works is executed. For example, for given number of players, it sets the
+11 sticks to remove in one-hot encoding of 11-bit register. Then, on Roll button
+push, the main logic is executed. The whole logic can be represented in the 
+following FSM:
 
 ![Delay FSM](/img/delay_fsm.png)
 
+Delay FSM is 3-bit FSM, containing 8 distinct states. Four states of them
+are for delaying 1 second of the game. Each stage spends one second, as 
+the driving clock is Change clock(1 Hz). Technically, it is not a traditional
+clock, which is toggle basis, but a pulse clock. Since the implementation checks
+if the Change clock is high or not at 100 MHz rate, the traditional 1 Hz clock
+would be 1/2 Hz clock in this implementation. For better readability, instead of 
+having traditional 2 Hz clock, it takes 1 Hz pulse clock.
 
+* S0
+	* Animation: On roll button push, frequently-changing random numbers are
+		displayed. It is also implemented with a FSM:
+		![Animate FSM](/img/animate_fsm.png)
 
 ### Display Segment Module
 This module determines the front-end of the game. Based on the processed data from
