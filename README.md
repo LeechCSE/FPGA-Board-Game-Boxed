@@ -11,7 +11,7 @@ The game, Boxed, is simulated on FPGA board with Verilog.
 ## High-level Design
 ![High-level Design](/img/structure.png)
 
-### Clock Divider
+## Clock Divider
 This module divides the master clock(100 MHz) into the following clocks required
 in various sub-modules:
 * Fast Clock(~512 Hz) is used as a driver clock in **Display Segment** module
@@ -22,7 +22,7 @@ in various sub-modules:
 * New Clock(5 Hz) is used as a driver clock of Animate FSM in **Core** module
 
 
-### Async Button Handler
+## Async Button Handler
 This handler is a debouncer of `Start` and `Roll` hardware button. Due to
 the nature of mechanical buttons, when it is pressed, it won't 
 make immediate contact but will shift around a little bit. More specifically,
@@ -48,7 +48,7 @@ the clock speed, the latch could be re-sized for better reliability.
 | 0      | 01        | 1      |
 | 0      | 00        | 0      |
 
-### Core
+## Core
 This Core module contains the logic of the game. On start, some initialization
 works is executed. For example, for given number of players, it sets the
 11 sticks to remove in one-hot encoding of 11-bit register. Then, on Roll button
@@ -87,7 +87,7 @@ having traditional 2 Hz clock, it takes 1 Hz pulse clock.
 		sticks.
 	* Reset the local registers for the next turn
 
-### Display Segment Module
+## Display Segment Module
 This module determines the front-end of the game. Based on the processed data from
 **Core** module, it outputs either alphabet letter or digit on four slots of 
 seven-segment display.
