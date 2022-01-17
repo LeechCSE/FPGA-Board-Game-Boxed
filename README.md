@@ -68,6 +68,7 @@ having traditional 2 Hz clock, it takes 1 Hz pulse clock.
 * S0
 	* Animation: On roll button push, frequently-changing random numbers are
 		displayed. It is also implemented with a FSM:
+		
 		![Animate FSM](/img/animate_fsm.png)
 
 ### Display Segment Module
