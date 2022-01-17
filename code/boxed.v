@@ -96,12 +96,13 @@ display_seg display_seg_(
 endmodule
 
 
-//CORE
-
+/********/
+/* CORE */
+/********/
 module core(
 	//inputs
-	start, roll, score_mode, clk, number_of_player, change_clock, flash_clock, new_clock,
-
+	start, roll, score_mode, clk, number_of_player, change_clock, 
+		flash_clock, new_clock,
 	//outputs
 	ones_place, tens_place, player_num_place, p_disp, an
 );
@@ -144,14 +145,10 @@ reg [3:0] randOkay = 0;
 
 always@(posedge clk)
 begin
-   if(random1 < 6)//MIGHT REMOVE EQUALS
-     random1 <= random1 + 1;
-   else
-     random1 <= 1;
-   if(random2 > 0)//MIGHT REMOVE EQUALS
-     random2 <= random2 - 1;
-   else
-     random2 <= 6;
+   if(random1 < 6)	random1 <= random1 + 1;
+   else					random1 <= 1;
+   if(random2 > 0)	random2 <= random2 - 1;
+   else					random2 <= 6;
 
    if(1)// !score_mode
      begin
@@ -1794,7 +1791,9 @@ end
    
 endmodule
 
-//CLOCK DIVIDER
+/*****************/
+/* CLOCK DIVIDER */
+/*****************/
 module clock_divider (
     //inputs
     master_clk,
@@ -1862,11 +1861,13 @@ end
 
 endmodule
 
-
+/***************/
+/* SCORE BOARD */
+/***************/
 module display_seg (
     //inputs
-    change_clk, fast_clk, ones_place, tens_place, p_disp, score_mode, number_of_players, player_num_place,
-
+    change_clk, fast_clk, ones_place, tens_place, p_disp, score_mode, 
+		number_of_players, player_num_place,
     //output
     seg, an
 );
@@ -1885,26 +1886,26 @@ reg [1:0] state; //for clock/seven seg iteration
 always @(posedge fast_clk)
   begin
      case(state)
-       0:
-	 begin
-	    state = state + 1;
-	    an <= 4'b0111;
-	 end
-       1:
-	 begin
-	    state = state + 1;
-	    an <= 4'b1011;
-	 end
-       2:
-	 begin
-	    state = state + 1;
-	    an <= 4'b1101;
-	 end
-       3:
-	 begin
-	    state = state + 1; //possibly set to zero
-	    an <= 4'b1110;
-	 end
+	   0:
+		 begin
+			 state = state + 1;
+			 an <= 4'b0111;
+		 end
+		1:
+		 begin
+			 state = state + 1;
+			 an <= 4'b1011;
+		 end
+		2:
+		 begin
+			 state = state + 1;
+			 an <= 4'b1101;
+		 end
+		3:
+		 begin
+			 state = state + 1;
+			 an <= 4'b1110;
+		 end
      endcase
   end
 
@@ -1924,101 +1925,62 @@ localparam letter_e = 8'b10000110;
 localparam letter_g = 8'b11000010;
 localparam blank = 8'b11111111;
 
-
 always @*
   begin
      if (an == 4'b0111)
        begin
-	  case(p_disp)
-	    0: //P
-	      seg <= letter_p;
-	    1: //S
-	      seg <= letter_s;
-	    2: //E
-	      seg <= letter_e;
-	    3: //Blank
-	      seg <= blank;
-	    default: //center line
-	      seg <= 8'b10111111;
-	  endcase
+		  case(p_disp)
+			 0: seg <= letter_p;
+			 1: seg <= letter_s;
+			 2: seg <= letter_e;
+			 3: seg <= blank;
+			 default: seg <= 8'b10111111;
+		  endcase
        end
-     
      else if (an == 4'b1011)
        begin
-	  case(player_num_place)
-	    0: //G
-	      seg <= letter_g;
-	    1:
-	      seg <= one;
-	    2:
-	      seg <= two;
-	    3:
-	      seg <= three;
-	    4:
-	      seg <= four;
-	    5: //Blank
-	      seg <= blank;
-	    default: //center line
-	      seg <= 8'b10111111;
-	  endcase
+		  case(player_num_place)
+			 0: seg <= letter_g;
+			 1: seg <= one;
+			 2: seg <= two;
+			 3: seg <= three;
+			 4: seg <= four;
+			 5: seg <= blank;
+			 default: seg <= 8'b10111111;
+		  endcase
        end
-     
      else if (an == 4'b1101)
        begin
-	  case(tens_place)
-	    0:
-	      seg <= zero;
-	    1:
-	      seg <= one;
-	    2:
-	      seg <= two;
-	    3:
-	      seg <= three;
-	    4:
-	      seg <= four;
-	    5:
-	      seg <= five;
-	    6:
-	      seg <= six;
-	    7://P
-	      seg <= letter_p;
-	    8://Blank
-	      seg <= blank;
-	    default: //center line
-	      seg <= 8'b10111111;
-	  endcase
+		  case(tens_place)
+			 0: seg <= zero;
+			 1: seg <= one;
+			 2: seg <= two;
+			 3: seg <= three;
+			 4: seg <= four;
+			 5: seg <= five;
+			 6: seg <= six;
+			 7: seg <= letter_p;
+			 8: seg <= blank;
+			 default: seg <= 8'b10111111;
+		  endcase
        end
-     
      else if (an == 4'b1110)
        begin
-	  case(ones_place)
-	    0:
-	      seg <= zero;
-	    1:
-	      seg <= one;
-	    2:
-	      seg <= two;
-	    3:
-	      seg <= three;
-	    4:
-	      seg <= four;
-	    5:
-	      seg <= five;
-	    6:
-	      seg <= six;
-	    7:
-	      seg <= seven;
-	    8:
-	      seg <= eight;
-	    9:
-	      seg <= nine;
-	    10://Blank
-	      seg <= blank;
-	    default: //center line
-	      seg <= 8'b10111111;
-	  endcase
+		  case(ones_place)
+			 0: seg <= zero;
+			 1: seg <= one;
+			 2: seg <= two;
+			 3: seg <= three;
+			 4: seg <= four;
+			 5: seg <= five;
+			 6: seg <= six;
+			 7: seg <= seven;
+			 8: seg <= eight;
+			 9: seg <= nine;
+			 10: seg <= blank;
+			 default: seg <= 8'b10111111;
+		  endcase
        end
-     
      else
        seg <= 8'b00000000;
   end
