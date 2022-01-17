@@ -30,10 +30,8 @@ assign astrt_i = btn_start;
 assign strt = astrt_ff[0];
 
 always @ (posedge clk or posedge astrt_i) begin
-   if (astrt_i)
-     astrt_ff <= 2'b11;
-   else
-     astrt_ff <= {1'b0, astrt_ff[1]};
+   if (astrt_i) astrt_ff <= 2'b11;
+   else         astrt_ff <= {1'b0, astrt_ff[1]};
 end
 
 //ROLL BUTTON
@@ -45,10 +43,8 @@ assign arll_i = btn_roll;
 assign rll = arll_ff[0];
 
 always @ (posedge clk or posedge arll_i) begin
-   if (arll_i)
-     arll_ff <= 2'b11;
-   else
-     arll_ff <= {1'b0, arll_ff[1]};
+   if (arll_i) arll_ff <= 2'b11;
+   else        arll_ff <= {1'b0, arll_ff[1]};
 end
 
 clock_divider clock_divider_(
