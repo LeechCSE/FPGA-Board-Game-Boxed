@@ -65,11 +65,27 @@ if the Change clock is high or not at 100 MHz rate, the traditional 1 Hz clock
 would be 1/2 Hz clock in this implementation. For better readability, instead of 
 having traditional 2 Hz clock, it takes 1 Hz pulse clock.
 
-* S0
+* S0: Start of turn
 	* Animation: On roll button push, frequently-changing random numbers are
 		displayed. It is also implemented with a FSM:
 		
 		![Animate FSM](/img/animate_fsm.png)
+		
+		Output represents Ten's place number/One's place number
+	* Random number: In order to simulate rolling of two dice, it generates 2
+		random number between 1 and 6.
+* S1 & S2: nothing(delay)
+* S3: display blank
+* S4
+	* Display the generated numbers in `P#XY` format (e.g. `P135`: Player 1 rolls
+		3 and 5)
+	* Remove corresponding stick of the player(e.g. For `P135`, remove stick-8 of
+		Player 1)
+* S5 & S6: nothing(delay)
+* S7: End of turn
+	* Check if the game is over, meaning that the player in turn has removed all
+		sticks.
+	* Reset the local registers for the next turn
 
 ### Display Segment Module
 This module determines the front-end of the game. Based on the processed data from
